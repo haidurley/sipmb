@@ -132,21 +132,23 @@
               Grafik total pembayaran.
             </a>
           </li>
-          
         </ul>
      </div>
     </nav>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Prodi Pilihan 1</h1>
+        <h1 class="h2">Grafik Status Pembayaran Tiap Bank</h1>
       </div>
-      <div class="row">
+        <div class="row">
         <div class="col-md-12">
-            <div id="pendaftar"></div>
+            <div id="pendaftar1"></div>
         </div>
-    </div>
-      </main>
+        <div class="col-md-12">
+            <div id="pendaftar2"></div>
+        </div>
+        </div>
+    </main>
   </div>
 </div>
 
@@ -156,8 +158,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
     <script>
-        getGrafikPie('pendaftar', <?= $grafik1 ?>, 'Grafik Pendaftar Berdasarkan Prodi Pilihan 1');
-
+        getGrafikPie('pendaftar1', <?= $grafik6 ?>, 'Grafik Pendaftar Yang Sudah Melakukan Pembayaran Tiap Bank');
+        
         function getGrafikPie(selector, data, title) {
         Highcharts.chart(selector, {
         chart: {
@@ -190,7 +192,47 @@
         series: [{
             name: 'Pendaftar',
             colorByPoint: true,
-            data: <?= $grafik1?>
+            data: <?= $grafik6?>
+        }]
+        });
+        }
+    </script>
+    <script>
+        getGrafikPie('pendaftar2', <?= $grafik7 ?>, 'Grafik Pendaftar Yang Belum Melakukan Pembayaran Tiap Bank');
+        
+        function getGrafikPie(selector, data, title) {
+        Highcharts.chart(selector, {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: title
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.jumlah:.1f} Pendaftar</b>'
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Pendaftar',
+            colorByPoint: true,
+            data: <?= $grafik7?>
         }]
         });
         }

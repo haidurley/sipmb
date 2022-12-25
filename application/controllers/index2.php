@@ -133,34 +133,71 @@ class Index2 extends CI_Controller {
 	{ 
     
 		$data['title'] = 'Grafik Berdasarkan Pendapatan Bank';
-		$bank = $this->m_pmb->listBank();
-		$pendaftar = $this->m_pmb->pendaftarBank();
+		$dapat = $this->m_pmb->pendapatan();
+		foreach ($dapat as $key => $d) {
+            $dapat[$key]['size'] = rand(10, 30);
+        }
+        
+        //grafik kelima
+       	$result = null;
+        foreach ($dapat as $d => $dap) {
+			$hasil[$d] = [
+				"name"  => $dap['nama_bank'],
+				"jumlah" => $dap['jumlah'],
+				"y"     => $dap['size'],
+				//"sliced" => $sliced,
+				//'selected' => $selected
+            ];
+        }
+		
 
-		$categories = null;
-		$lunas = null;
-		$belum_lunas = null;
-		$sumTotal = 0;
-		foreach ($bank as $i => $b) {
-			$categories[] = $b['bank'];
-			foreach ($pendaftar as $key => $value) {
-				if($b['id_bank'] == $value['id_bank']){
-					if($value['is_bayar'] == '1'){
-						$sumTotal += intval($value['total']);
-						$lunas[] = intval($value['total']);
-					}
-					else {
-						$belum_lunas[] = intval($value['total']);
-					}
-				}
-			}
-		}
-
-		$data['subtitle'] = 'Total Pendapatan Rp.' . $sumTotal;
-		$grafik['data'] = json_encode($result);
-		$grafik['categories'] = json_encode($categories);
-		$data['grafik'] = $grafik;
+        $data['Pendapatan'] = $dapat;
+        $data['grafik5'] = json_encode($hasil);
 		$this->load->view('index/pendapatan', $data);
+	}
 
+	public function pembayaran()
+	{ 
+    
+		$data['title'] = 'Grafik Berdasarkan Pembayaran';
+		$bayar = $this->m_pmb->sudahbayar();
+		foreach ($bayar as $key => $sb) {
+            $bayar[$key]['size'] = rand(10, 30);
+        }
+		$belum = $this->m_pmb->belumbayar();
+		foreach ($belum as $key => $bb) {
+            $belum[$key]['size'] = rand(10, 30);
+        }
+
+        //grafik keenam
+       	$result = null;
+        foreach ($bayar as $sb => $bay) {
+			$hasil[$sb] = [
+				"name"  => $bay['nama_bank'],
+				"jumlah" => $bay['jumlah'],
+				"y"     => $bay['size'],
+				//"sliced" => $sliced,
+				//'selected' => $selected
+            ];
+        }
+		//grafik ketujuh
+		$result = null;
+        foreach ($belum as $bb => $bel) {
+			$jumlah[$bb] = [
+				"name"  => $bel['nama_bank'],
+				"jumlah" => $bel['jumlah'],
+				"y"     => $bel['size'],
+				//"sliced" => $sliced,
+				//'selected' => $selected
+            ];
+        }
+		
+
+        $data['Pembayaran1'] = $bayar;
+		$data['Pembayaran2'] = $belum;
+        $data['grafik6'] = json_encode($hasil);
+		$data['grafik7'] = json_encode($jumlah);
+		$this->load->view('index/pembayaran', $data);
 	}
 
 }

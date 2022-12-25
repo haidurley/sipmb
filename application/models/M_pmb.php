@@ -82,12 +82,21 @@ class M_pmb extends CI_Model
         return $data;
     }
 
+    public function pendapatan()
+    {
+        return $this->db->get('no5')->result_array();
+    }
+    public function sudahbayar()
+    {
+        return $this->db->get('no6bayar')->result_array();
+    }
+    public function belumbayar()
+    {
+        return $this->db->get('no6belum')->result_array();
+    }
+
 
 
 
     
 }
-//$this->db->select('nama_bank');
-//$data = $this->db->get('bank2')->result_array();
-
-//return $data;

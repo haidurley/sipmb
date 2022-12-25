@@ -10,8 +10,8 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
     
-    <link href="<?= base_url('public')?> /lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?= base_url('public')?> /lib/highchart/code/css/highcharts.css" rel="stylesheet">
+    <link href="<?= base_url('public')?>/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= base_url('public')?>/lib/highchart/code/css/highcharts.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -120,6 +120,18 @@
               Grafik Pendaftar Jalur Masuk.
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?=site_url('index2/pendapatan')?>">
+              <span data-feather="layers" class="align-text-bottom"></span>
+              Grafik pendapatan tiap Bank.
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?=site_url('index2/pembayaran')?>">
+              <span data-feather="layers" class="align-text-bottom"></span>
+              Grafik total pembayaran.
+            </a>
+          </li>
           
         </ul>
      </div>
@@ -144,8 +156,8 @@
 </div>
 
 
-    <script src="<?= base_url('public')?> /lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="<?= base_url('public')?> /lib/highchart/code/highcharts.js"></script>
+    <script src="<?= base_url('public')?>/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= base_url('public')?>/lib/highchart/code/highcharts.js"></script>
 
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
   </body>

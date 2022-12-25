@@ -10,8 +10,8 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
     
-    <link href="<?= base_url('public')?> /lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?= base_url('public')?> /lib/highchart/code/css/highcharts.css">
+    <link href="<?= base_url('public')?>/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= base_url('public')?>/lib/highchart/code/css/highcharts.css">
 
     <style>
       .bd-placeholder-img {
@@ -127,7 +127,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="<?=site_url('index2/pembayaran')?>">
               <span data-feather="layers" class="align-text-bottom"></span>
               Grafik total pembayaran.
             </a>
@@ -150,50 +150,49 @@
 </div>
 
 
-    <script src="<?= base_url('public')?> /lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="<?= base_url('public')?> /lib/highchart/code/highcharts.js"></script>
+    <script src="<?= base_url('public')?>/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= base_url('public')?>/lib/highchart/code/highcharts.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
     <script>
-        Highcharts.chart('pendaftar', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: title
-    },
-    subtitle: {
-        text: subtitle
-    },
-    xAxis: {
-        categories: categories
-        crosshair: true
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: 'Pendaftar'
-        }
-    },
-    tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
-    series: data,
-	credits: {
-	enabled: false
-});
+        getGrafikPie('pendaftar', <?= $grafik5 ?>, 'Grafik Pendaftar Berdasarkan Pendatapan Tiap Bank');
 
+        function getGrafikPie(selector, data, title) {
+        Highcharts.chart(selector, {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: title
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>Rp. {point.jumlah:.1f}</b>'
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Pendapatan',
+            colorByPoint: true,
+            data: <?= $grafik5?>
+        }]
+        });
+        }
     </script>
     </body>
 </html>
